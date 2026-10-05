@@ -1,0 +1,30 @@
+WJTSentDiL Processed Dataset Summary
+====================================
+
+Source: bennexx/WJTSentDiL
+Subset: main_data
+
+Purpose:
+Training data for Japanese BERT JLPT Proficiency Level Estimator.
+
+Cleaning performed:
+- Removed empty sentences
+- Removed exact duplicate sentences
+- Removed sentences shorter than 3 characters
+- Removed sentences longer than 300 characters
+- Required Japanese characters
+- Balanced JLPT classes
+
+Class distribution:
+N5: 20000
+N4: 20000
+N3: 20000
+N2: 20000
+N1: 20000
+
+Total: 100000
+
+Dataset Split:
+Training: 80000 records
+Validation: 10000 records
+Testing: 10000 records

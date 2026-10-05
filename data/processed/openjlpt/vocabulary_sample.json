@@ -1,0 +1,27 @@
+[
+  {
+    "id": "sample_001",
+    "type": "vocabulary",
+    "word": "食べる",
+    "reading": "たべる",
+    "romaji": "taberu",
+    "meaning_en": [
+      "to eat"
+    ],
+    "meaning_ms": [
+      "makan"
+    ],
+    "jlpt_level": "N5",
+    "part_of_speech": [
+      "verb"
+    ],
+    "examples": [
+      {
+        "japanese": "私はパンを食べます。",
+        "english": "I eat bread.",
+        "malay": "Saya makan roti."
+      }
+    ],
+    "source": "OpenJLPT"
+  }
+]

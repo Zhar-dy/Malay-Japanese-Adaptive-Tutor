@@ -1,0 +1,32 @@
+# Raw datasets
+data/raw/
+
+# Full processed datasets
+data/processed/openjlpt/vocabulary.json
+data/processed/openjlpt/grammar.json
+
+# Keep small supervisor/sample datasets
+!data/processed/openjlpt/*sample*.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model files later
+*.pt
+*.pth
+*.bin
+*.safetensors

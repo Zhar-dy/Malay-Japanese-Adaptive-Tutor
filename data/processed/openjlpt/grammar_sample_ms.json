@@ -1,0 +1,672 @@
+[
+  {
+    "id": "wa",
+    "type": "grammar",
+    "pattern": "〜は",
+    "romaji": "wa",
+    "meaning_en": "as for; marks the topic of the sentence",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Noun + は",
+    "jlpt_level": "N5",
+    "examples": [
+      {
+        "japanese": "私は学生です。",
+        "english": "I am a student.",
+        "malay": ""
+      },
+      {
+        "japanese": "今日は天気がいいです。",
+        "english": "The weather is nice today.",
+        "malay": ""
+      },
+      {
+        "japanese": "この本はおもしろいです。",
+        "english": "This book is interesting.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "particle",
+      "topic"
+    ],
+    "notes": "Written は but pronounced 'wa'. It sets up what the sentence is about; the key information comes after it.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "ga-subject",
+    "type": "grammar",
+    "pattern": "〜が（subject）",
+    "romaji": "ga (subject)",
+    "meaning_en": "marks the subject; points out new or focused information",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Noun + が",
+    "jlpt_level": "N5",
+    "examples": [
+      {
+        "japanese": "雨が降っています。",
+        "english": "It is raining.",
+        "malay": ""
+      },
+      {
+        "japanese": "だれが窓を開けましたか。",
+        "english": "Who opened the window?",
+        "malay": ""
+      },
+      {
+        "japanese": "私が行きます。",
+        "english": "I'll be the one to go.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "particle"
+    ],
+    "notes": "Question words such as だれ and 何 take が, never は, when they are the subject. が is also used with 好き, ほしい, 上手 and わかる for the thing liked, wanted or understood.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "o",
+    "type": "grammar",
+    "pattern": "〜を",
+    "romaji": "o",
+    "meaning_en": "marks the direct object of a verb; marks a place moved through or left",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Noun + を",
+    "jlpt_level": "N5",
+    "examples": [
+      {
+        "japanese": "毎朝パンを食べます。",
+        "english": "I eat bread every morning.",
+        "malay": ""
+      },
+      {
+        "japanese": "姉は新しいかばんを買いました。",
+        "english": "My older sister bought a new bag.",
+        "malay": ""
+      },
+      {
+        "japanese": "公園を散歩しました。",
+        "english": "I took a walk in the park.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "particle"
+    ],
+    "notes": "Written を but pronounced 'o'. With movement verbs such as 歩く, 散歩する and 出る it marks the route or the place being left.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "ni-time",
+    "type": "grammar",
+    "pattern": "〜に（time）",
+    "romaji": "ni (time)",
+    "meaning_en": "at; on; in (a specific point in time)",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Noun + に",
+    "jlpt_level": "N5",
+    "examples": [
+      {
+        "japanese": "毎朝7時に起きます。",
+        "english": "I get up at seven every morning.",
+        "malay": ""
+      },
+      {
+        "japanese": "日曜日に友達と会います。",
+        "english": "I'm meeting a friend on Sunday.",
+        "malay": ""
+      },
+      {
+        "japanese": "8月に国へ帰ります。",
+        "english": "I'm going back to my country in August.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "particle",
+      "time"
+    ],
+    "notes": "Used with clock times, dates, days of the week and months. Relative words such as 今日, 明日, 毎日 and 来週 take no に.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "ni-destination",
+    "type": "grammar",
+    "pattern": "〜に（destination）",
+    "romaji": "ni (destination)",
+    "meaning_en": "to; into (the destination of movement)",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Noun + に + 行く / 来る / 帰る",
+    "jlpt_level": "N5",
+    "examples": [
+      {
+        "japanese": "毎日バスで学校に行きます。",
+        "english": "I go to school by bus every day.",
+        "malay": ""
+      },
+      {
+        "japanese": "夜10時に家に帰りました。",
+        "english": "I got home at 10 p.m.",
+        "malay": ""
+      },
+      {
+        "japanese": "来月、姉が日本に来ます。",
+        "english": "My older sister is coming to Japan next month.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "particle"
+    ],
+    "notes": "Close in meaning to へ. に puts the focus on the arrival point, へ on the direction.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "ni-location",
+    "type": "grammar",
+    "pattern": "〜に（place of existence）",
+    "romaji": "ni (location)",
+    "meaning_en": "in; at; on (where someone or something is)",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Noun + に + ある / いる",
+    "jlpt_level": "N5",
+    "examples": [
+      {
+        "japanese": "机の上に辞書があります。",
+        "english": "There is a dictionary on the desk.",
+        "malay": ""
+      },
+      {
+        "japanese": "姉は東京に住んでいます。",
+        "english": "My older sister lives in Tokyo.",
+        "malay": ""
+      },
+      {
+        "japanese": "猫は今どこにいますか。",
+        "english": "Where is the cat now?",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "particle"
+    ],
+    "notes": "Used with ある, いる and 住む. For the place where an action happens (eat, study, play), use で instead.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "ni-indirect-object",
+    "type": "grammar",
+    "pattern": "〜に（indirect object）",
+    "romaji": "ni (indirect object)",
+    "meaning_en": "to (the person who receives or is the target of an action)",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Noun + に",
+    "jlpt_level": "N5",
+    "examples": [
+      {
+        "japanese": "母に手紙を書きます。",
+        "english": "I'm going to write a letter to my mother.",
+        "malay": ""
+      },
+      {
+        "japanese": "妹に本を貸しました。",
+        "english": "I lent a book to my younger sister.",
+        "malay": ""
+      },
+      {
+        "japanese": "友達に電話をかけました。",
+        "english": "I called my friend.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "particle"
+    ],
+    "notes": "Common with あげる, 貸す, 教える, 見せる, 電話をかける and 会う. With もらう and 借りる, に marks the person you get something from.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "ni-frequency",
+    "type": "grammar",
+    "pattern": "〜に（frequency）",
+    "romaji": "ni (frequency)",
+    "meaning_en": "per; in (how many times within a period)",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Noun + に + Noun",
+    "jlpt_level": "N5",
+    "examples": [
+      {
+        "japanese": "一週間に二回、プールで泳ぎます。",
+        "english": "I swim in the pool twice a week.",
+        "malay": ""
+      },
+      {
+        "japanese": "母は一日に二回、犬の散歩をします。",
+        "english": "My mother walks the dog twice a day.",
+        "malay": ""
+      },
+      {
+        "japanese": "一年に一度、家族で旅行します。",
+        "english": "Once a year, my family goes on a trip.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "particle",
+      "quantity"
+    ],
+    "notes": "The period comes first, then に, then the number of times: 月に一回 (once a month).",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "e",
+    "type": "grammar",
+    "pattern": "〜へ",
+    "romaji": "e",
+    "meaning_en": "to; toward (the direction of movement)",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Noun + へ",
+    "jlpt_level": "N5",
+    "examples": [
+      {
+        "japanese": "夏休みに北海道へ行きます。",
+        "english": "I'm going to Hokkaido during summer vacation.",
+        "malay": ""
+      },
+      {
+        "japanese": "来週、国へ帰ります。",
+        "english": "I'm going back to my home country next week.",
+        "malay": ""
+      },
+      {
+        "japanese": "どこへ行きますか。",
+        "english": "Where are you going?",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "particle"
+    ],
+    "notes": "Written へ but pronounced 'e'. Usually interchangeable with に for destinations; へ stresses the direction a little more.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "de-place",
+    "type": "grammar",
+    "pattern": "〜で（place of action）",
+    "romaji": "de (place)",
+    "meaning_en": "at; in (the place where an action happens)",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Noun + で",
+    "jlpt_level": "N5",
+    "examples": [
+      {
+        "japanese": "図書館で本を読みます。",
+        "english": "I read books at the library.",
+        "malay": ""
+      },
+      {
+        "japanese": "きのう、デパートでくつを買いました。",
+        "english": "Yesterday I bought shoes at the department store.",
+        "malay": ""
+      },
+      {
+        "japanese": "駅の前で友達を待ちました。",
+        "english": "I waited for my friend in front of the station.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "particle"
+    ],
+    "notes": "Compare 教室にいます (being somewhere: に) with 教室で勉強します (doing something there: で).",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "ageru-kureru-morau",
+    "type": "grammar",
+    "pattern": "あげる / くれる / もらう",
+    "romaji": "ageru / kureru / morau",
+    "meaning_en": "give (to someone else); give (to me or my group); receive",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Noun (receiver) + に + Noun + を + あげる / Noun (giver) + が + Noun + を + くれる / Noun (giver) + に + Noun + を + もらう",
+    "jlpt_level": "N4",
+    "examples": [
+      {
+        "japanese": "私は弟に古いゲームをあげた。",
+        "english": "I gave my old game to my little brother.",
+        "malay": ""
+      },
+      {
+        "japanese": "姉が誕生日にかわいいかばんをくれました。",
+        "english": "My older sister gave me a cute bag for my birthday.",
+        "malay": ""
+      },
+      {
+        "japanese": "友達から旅行のおみやげをもらった。",
+        "english": "I got a souvenir from my friend's trip.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "giving-receiving"
+    ],
+    "notes": "くれる is used only when the receiver is the speaker or someone in the speaker's group. With もらう the giver can be marked with に or から.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "te-ageru",
+    "type": "grammar",
+    "pattern": "〜てあげる",
+    "romaji": "te ageru",
+    "meaning_en": "do something for someone (as a favor)",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Verb-te + あげる",
+    "jlpt_level": "N4",
+    "examples": [
+      {
+        "japanese": "妹の宿題を手伝ってあげました。",
+        "english": "I helped my little sister with her homework.",
+        "malay": ""
+      },
+      {
+        "japanese": "道に迷っている人に、駅までの行き方を教えてあげた。",
+        "english": "I showed someone who was lost how to get to the station.",
+        "malay": ""
+      },
+      {
+        "japanese": "重そうだね。持ってあげようか。",
+        "english": "That looks heavy. Want me to carry it for you?",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "giving-receiving"
+    ],
+    "notes": "Said directly to a superior it can sound condescending; use the humble お〜しましょうか (お持ちしましょうか) instead.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "te-kureru",
+    "type": "grammar",
+    "pattern": "〜てくれる",
+    "romaji": "te kureru",
+    "meaning_en": "someone does something for me (or my group)",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Verb-te + くれる",
+    "jlpt_level": "N4",
+    "examples": [
+      {
+        "japanese": "友達が引っ越しを手伝ってくれた。",
+        "english": "A friend helped me move.",
+        "malay": ""
+      },
+      {
+        "japanese": "父が駅まで車で送ってくれました。",
+        "english": "My father drove me to the station.",
+        "malay": ""
+      },
+      {
+        "japanese": "母が毎朝お弁当を作ってくれます。",
+        "english": "My mother makes me a boxed lunch every morning.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "giving-receiving"
+    ],
+    "notes": "The subject is the person doing the favor; the one who benefits is the speaker or someone close to them.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "te-morau",
+    "type": "grammar",
+    "pattern": "〜てもらう",
+    "romaji": "te morau",
+    "meaning_en": "have someone do something (for me); get someone to do",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Verb-te + もらう",
+    "jlpt_level": "N4",
+    "examples": [
+      {
+        "japanese": "先輩にレポートを見てもらった。",
+        "english": "I had a senior student look over my report.",
+        "malay": ""
+      },
+      {
+        "japanese": "友達に写真を撮ってもらった。",
+        "english": "I had a friend take my picture.",
+        "malay": ""
+      },
+      {
+        "japanese": "分からないところを先生に説明してもらいました。",
+        "english": "I had the teacher explain the parts I didn't understand.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "giving-receiving"
+    ],
+    "notes": "The receiver of the favor is the subject, and the person who does the action is marked with に.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "te-kudasaru-te-itadaku",
+    "type": "grammar",
+    "pattern": "〜てくださる / 〜ていただく",
+    "romaji": "te kudasaru / te itadaku",
+    "meaning_en": "(honorific) someone kindly does for me; (humble) I receive the favor of someone doing",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Verb-te + くださる / Verb-te + いただく",
+    "jlpt_level": "N4",
+    "examples": [
+      {
+        "japanese": "先生が私の作文を直してくださいました。",
+        "english": "My teacher kindly corrected my essay.",
+        "malay": ""
+      },
+      {
+        "japanese": "ホテルの方に、おいしい店を教えていただきました。",
+        "english": "The hotel staff kindly told me about a good restaurant.",
+        "malay": ""
+      },
+      {
+        "japanese": "今日は来ていただいて、ありがとうございました。",
+        "english": "Thank you very much for coming today.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "giving-receiving",
+      "honorific",
+      "humble"
+    ],
+    "notes": "くださる is the honorific version of くれる (ます-form: くださいます); いただく is the humble version of もらう.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "te-iku",
+    "type": "grammar",
+    "pattern": "〜ていく",
+    "romaji": "te iku",
+    "meaning_en": "do something and go; go on doing (from now into the future)",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Verb-te + いく",
+    "jlpt_level": "N4",
+    "examples": [
+      {
+        "japanese": "雨が降りそうだから、傘を持っていきます。",
+        "english": "It looks like rain, so I'll take an umbrella.",
+        "malay": ""
+      },
+      {
+        "japanese": "これからもっと寒くなっていくでしょう。",
+        "english": "It will probably keep getting colder from now on.",
+        "malay": ""
+      },
+      {
+        "japanese": "時間があるなら、お茶を飲んでいきませんか。",
+        "english": "If you have time, won't you have some tea before you go?",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "change",
+      "sequence"
+    ],
+    "notes": "Movement or change away from the speaker, or from now toward the future. Compare 〜てくる.",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "te-kuru",
+    "type": "grammar",
+    "pattern": "〜てくる",
+    "romaji": "te kuru",
+    "meaning_en": "do something and come back; come doing; (change) up to now; start to",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Verb-te + くる",
+    "jlpt_level": "N4",
+    "examples": [
+      {
+        "japanese": "ちょっとコンビニに行ってきます。",
+        "english": "I'm just popping out to the convenience store.",
+        "malay": ""
+      },
+      {
+        "japanese": "日本語が少しずつ分かってきた。",
+        "english": "I've gradually started to understand Japanese.",
+        "malay": ""
+      },
+      {
+        "japanese": "おなかがすいてきた。",
+        "english": "I'm starting to get hungry.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "change",
+      "sequence"
+    ],
+    "notes": "Movement or change toward the speaker, or from the past up to now. 行ってきます literally means 'I'll go and come back.'",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "te-shimau-chau",
+    "type": "grammar",
+    "pattern": "〜てしまう / 〜ちゃう",
+    "romaji": "te shimau / chau",
+    "meaning_en": "finish completely; do by accident; end up doing (with regret)",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Verb-te + しまう",
+    "jlpt_level": "N4",
+    "examples": [
+      {
+        "japanese": "電車に傘を忘れてしまいました。",
+        "english": "I left my umbrella on the train.",
+        "malay": ""
+      },
+      {
+        "japanese": "この本はおもしろくて、一晩で読んでしまった。",
+        "english": "This book was so interesting that I read the whole thing in one night.",
+        "malay": ""
+      },
+      {
+        "japanese": "あ、ケーキを全部食べちゃった。",
+        "english": "Oops, I ate all the cake.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "completion",
+      "regret",
+      "casual"
+    ],
+    "notes": "In speech 〜てしまう contracts to 〜ちゃう, and 〜でしまう to 〜じゃう (飲んじゃう).",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "te-oku",
+    "type": "grammar",
+    "pattern": "〜ておく",
+    "romaji": "te oku",
+    "meaning_en": "do in advance (to prepare); do and leave as is",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Verb-te + おく",
+    "jlpt_level": "N4",
+    "examples": [
+      {
+        "japanese": "旅行の前に、ホテルを予約しておきます。",
+        "english": "I'll book the hotel before the trip.",
+        "malay": ""
+      },
+      {
+        "japanese": "パーティーのために、飲み物を冷やしておいた。",
+        "english": "I chilled the drinks for the party.",
+        "malay": ""
+      },
+      {
+        "japanese": "エアコンはつけておいてください。",
+        "english": "Please leave the air conditioner on.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "purpose",
+      "state"
+    ],
+    "notes": "In casual speech 〜ておく often becomes 〜とく (買っとく), and 〜でおく becomes 〜どく (読んどく).",
+    "source": "OpenJLPT"
+  },
+  {
+    "id": "te-miru",
+    "type": "grammar",
+    "pattern": "〜てみる",
+    "romaji": "te miru",
+    "meaning_en": "try doing (to see what it is like)",
+    "meaning_ms": "",
+    "explanation_ms": "",
+    "formation": "Verb-te + みる",
+    "jlpt_level": "N4",
+    "examples": [
+      {
+        "japanese": "このシャツ、着てみてもいいですか。",
+        "english": "May I try this shirt on?",
+        "malay": ""
+      },
+      {
+        "japanese": "新しくできたラーメン屋に行ってみた。",
+        "english": "I went to check out the new ramen shop.",
+        "malay": ""
+      },
+      {
+        "japanese": "日本の料理を自分で作ってみたいです。",
+        "english": "I want to try making Japanese food myself.",
+        "malay": ""
+      }
+    ],
+    "tags": [
+      "attempt"
+    ],
+    "notes": "Means trying something out to see the result, not making an effort to do something difficult.",
+    "source": "OpenJLPT"
+  }
+]

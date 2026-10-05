@@ -1,0 +1,21 @@
+[
+  {
+    "id": "sample_grammar_001",
+    "type": "grammar",
+    "pattern": "〜てもいい",
+    "romaji": "te mo ii",
+    "meaning_en": "may; it's okay to",
+    "meaning_ms": "boleh; tidak mengapa untuk",
+    "explanation_ms": "Digunakan untuk meminta atau memberikan kebenaran.",
+    "formation": "Verb-te + もいい",
+    "jlpt_level": "N5",
+    "examples": [
+      {
+        "japanese": "ここに座ってもいいですか。",
+        "english": "May I sit here?",
+        "malay": "Bolehkah saya duduk di sini?"
+      }
+    ],
+    "source": "OpenJLPT"
+  }
+]

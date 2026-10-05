@@ -2,78 +2,156 @@
 
 Final Year Project (FYP) for an adaptive Japanese language tutoring system designed for Malaysian learners.
 
-The project uses Retrieval-Augmented Generation (RAG) together with JLPT-level estimation to provide Japanese learning support based on the learner's proficiency level.
+The system aims to provide Japanese learning support using Retrieval-Augmented Generation (RAG), JLPT proficiency estimation, and adaptive teaching strategies.
 
 ## Project Goals
 
 - Support Japanese learning for Malaysian learners
-- Accept Japanese, English, and Malay input
+- Accept Malay, English, and Japanese input
 - Estimate the learner's JLPT proficiency level
 - Retrieve JLPT-appropriate vocabulary and grammar
-- Provide Malay explanations
-- Adapt teaching difficulty using scaffolding principles
+- Provide explanations in Malay
+- Adapt learning support based on the learner's proficiency
 
 ## Current Progress
 
-### OpenJLPT Data Preparation
+### 1. OpenJLPT
 
-Completed:
+OpenJLPT is prepared as the main knowledge source for the RAG system.
 
-- OpenJLPT dataset downloaded and prepared
-- Vocabulary data from N5 to N1 combined
-- Grammar data from N5 to N1 combined
-- Data schema standardized
-- Dataset validation completed
-- Malay localization pipeline tested
-- Malaysian Malay naturalization sample prepared
+Processed:
 
-### Processed Data
+- 7,811 vocabulary records
+- 526 grammar records
+- JLPT levels N5 to N1
+- Vocabulary and grammar schemas standardized
+- Dataset validated
+- No missing critical fields
+- No duplicate IDs
+- Malay localization workflow tested
+- Malaysian Malay localization sample prepared
 
-Vocabulary:
+Example sentence coverage:
 
-- 7,811 records
-- N5: 674
-- N4: 630
-- N3: 1,659
-- N2: 1,778
-- N1: 3,070
+- 7,245 / 7,811 vocabulary records
+- 526 / 526 grammar records
 
-Grammar:
+**Status:** Ready for RAG development.
 
-- 526 records
-- N5: 81
-- N4: 98
-- N3: 101
-- N2: 123
-- N1: 123
+### 2. WJTSentDiL
 
-Validation results:
+WJTSentDiL is prepared for training the Japanese BERT-based JLPT Proficiency Level Estimator.
 
-- 0 missing vocabulary words
-- 0 missing readings
-- 0 missing romaji
-- 0 missing English meanings
-- 0 missing JLPT levels
-- 0 duplicate vocabulary IDs
-- 0 duplicate grammar IDs
-- 7,245 vocabulary records contain example sentences
-- All 526 grammar records contain example sentences
+A balanced subset of 100,000 Japanese sentences was prepared:
+
+| JLPT Level | Sentences |
+|---|---:|
+| N5 | 20,000 |
+| N4 | 20,000 |
+| N3 | 20,000 |
+| N2 | 20,000 |
+| N1 | 20,000 |
+
+Dataset split:
+
+- Training: 80,000
+- Validation: 10,000
+- Testing: 10,000
+
+Validation checks:
+
+- No missing sentences or labels
+- No duplicate sentences
+- No overlap between dataset splits
+- Balanced JLPT classes
+- Valid N1-N5 labels
+
+**Status:** Ready for Japanese BERT model development.
 
 ## Data Pipeline
 
 ```text
 OpenJLPT
    ↓
-Raw JSON Data
-   ↓
 Preprocessing
    ↓
 Schema Standardization
    ↓
-Data Validation
+Validation
    ↓
-DeepL EN → MS Translation
+Malay Localization
    ↓
-Malaysian Malay Naturalization
+RAG Knowledge Base
+
+
+WJTSentDiL
    ↓
-Localized RAG Knowledge Base
+Cleaning
+   ↓
+Balanced N1-N5 Sampling
+   ↓
+Train / Validation / Test Split
+   ↓
+Validation
+   ↓
+Japanese BERT JLPT Estimator
+```
+
+## Project Structure
+
+```text
+Malay-Japanese_Adaptive_Tutor/
+│
+├── data/
+│   ├── DATA_PREPROCESSING_AND_LOCALIZATION.md
+│   └── processed/
+│       ├── openjlpt/
+│       └── wjtsentdil/
+│
+├── scripts/
+│   ├── process_openjlpt.py
+│   ├── validate_openjlpt.py
+│   ├── create_localization_sample.py
+│   ├── inspect_wjtsentdil.py
+│   ├── prepare_wjtsentdil.py
+│   └── validate_wjtsentdil.py
+│
+└── README.md
+```
+
+## Planned System
+
+The final prototype is planned to include:
+
+- LLM-based Japanese tutor
+- Retrieval-Augmented Generation (RAG)
+- JLPT Proficiency Level Estimator
+- Adaptive scaffolding
+- Malay explanations
+- Japanese text and Romaji output
+- Japanese Text-to-Speech using Voicevox
+
+## Development Status
+
+**Current Phase: Data Preparation Completed**
+
+Next:
+
+1. Develop the Japanese BERT JLPT Proficiency Level Estimator
+2. Prepare the OpenJLPT vector database
+3. Develop the RAG pipeline
+4. Integrate adaptive tutoring logic
+5. Build the user interface
+6. Integrate Voicevox
+7. Evaluate the prototype
+
+## Data Sources
+
+- OpenJLPT — vocabulary, grammar, and example sentences
+- WJTSentDiL — Japanese sentence difficulty/JLPT level data
+
+## Notes
+
+Malay localization is currently being developed using English-to-Malay machine translation followed by Malaysian Malay naturalization and review.
+
+The WJTSentDiL labels are retained from the original dataset. The processed subset has been validated for structural consistency, class balance, duplicates, and train/validation/test leakage.

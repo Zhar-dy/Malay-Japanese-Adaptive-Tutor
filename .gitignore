@@ -1,17 +1,9 @@
 # Raw datasets
 data/raw/
 
-# Full processed datasets
-data/processed/openjlpt/vocabulary.json
-data/processed/openjlpt/grammar.json
-# Large processed datasets
-data/processed/wjtsentdil/train.csv
-data/processed/wjtsentdil/validation.csv
-data/processed/wjtsentdil/test.csv
-
-
-# Keep small supervisor/sample datasets
-!data/processed/openjlpt/*sample*.json
+# Processed datasets
+data/processed/openjlpt/
+data/processed/wjtsentdil/
 
 # Python
 __pycache__/
@@ -38,3 +30,5 @@ Thumbs.db
 
 # Keep summary files
 !data/processed/wjtsentdil/dataset_summary.txt
+!data/DATA_PREPROCESSING_AND_LOCALIZATION.md
+!data/processed/Processed Data Summary.txt

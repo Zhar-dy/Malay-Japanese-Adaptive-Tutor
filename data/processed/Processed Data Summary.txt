@@ -1,0 +1,14 @@
+Processed Data Summary
+OpenJLPT — RAG Knowledge Base
+- 7,811 vocabulary records and 526 grammar records covering JLPT N5–N1.
+- Schemas standardized, required original fields checked, and no duplicate IDs found.
+- 7,245 vocabulary records contain examples; 566 are retained without examples.
+- All 526 grammar records contain examples.
+- Grammar Malay localization completed and structurally validated: 1,526 translated examples.
+- Vocabulary Malay translations generated; correction and review are still ongoing.
+WJTSentDiL — Japanese BERT Training Data
+- 100,000 Japanese sentences, balanced at 20,000 per JLPT level.
+- Training: 80,000; validation: 10,000; testing: 10,000.
+- No missing sentences or labels, no exact duplicate sentences, and no exact sentence overlaps between splits.
+- Source labels retained; validation checks structural consistency rather than independently verifying JLPT difficulty.
+- Ready for model development.

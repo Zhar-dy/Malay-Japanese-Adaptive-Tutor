@@ -147,8 +147,8 @@ Next:
 
 ## Data Sources
 
-- OpenJLPT — vocabulary, grammar, and example sentences
-- WJTSentDiL — Japanese sentence difficulty/JLPT level data
+- [OpenJLPT](https://github.com/evanclan/OpenJLPT) — vocabulary, grammar, and example sentences
+- [WJTSentDiL](https://huggingface.co/datasets/bennexx/WJTSentDiL) — Japanese sentence difficulty/JLPT level data
 
 ## Notes
 

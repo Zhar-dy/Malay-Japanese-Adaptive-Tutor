@@ -1,157 +1,136 @@
-# Adaptive Japanese Tutor
+# Malay–Japanese Adaptive Tutor
 
-Final Year Project (FYP) for an adaptive Japanese language tutoring system designed for Malaysian learners.
+Final Year Project (FYP) for an adaptive Japanese language tutoring system designed for Malaysian learners, curated and developed by **Zhardyz**.
 
-The system aims to provide Japanese learning support using Retrieval-Augmented Generation (RAG), JLPT proficiency estimation, and adaptive teaching strategies.
+The planned system combines Retrieval-Augmented Generation (RAG), Japanese sentence-difficulty classification, and adaptive teaching strategies to provide explanations in Malay. Learners will be able to use Malay, English, and Japanese.
+
+**Current phase:** Processed datasets published; model training, retrieval, and tutor integration are next. No trained-model results or learning-effectiveness results are claimed yet.
+
+## Published Datasets
+
+| Dataset | Purpose | Release |
+| --- | --- | --- |
+| OpenJLPT-Malay | Malay-localized vocabulary, grammar, and retrieval chunks for the RAG knowledge base | [Hugging Face](https://huggingface.co/datasets/zhardyz/OpenJLPT-Malay) |
+| WJTSentDiL project subset | Cleaned Japanese sentences with inherited JLPT silver labels for BERT sentence-difficulty experiments | [Hugging Face](https://huggingface.co/datasets/zhardyz/malay-japanese-adaptive-tutor-wjtsentdil) |
+
+These are derivative datasets prepared for this project. Original sources and contributors retain their respective rights. Each release includes its dataset card, licence, attribution notices, citation information, and data manifest.
 
 ## Project Goals
 
-- Support Japanese learning for Malaysian learners
-- Accept Malay, English, and Japanese input
-- Estimate the learner's JLPT proficiency level
-- Retrieve JLPT-appropriate vocabulary and grammar
-- Provide explanations in Malay
-- Adapt learning support based on the learner's proficiency
+- Support Japanese learning for Malaysian learners.
+- Accept Malay, English, and Japanese input.
+- Retrieve vocabulary and grammar appropriate to the learning activity.
+- Provide explanations in Malay.
+- Use sentence-difficulty predictions alongside learner responses and performance to inform adaptive support.
+- Evaluate retrieval quality, classification performance, and the completed tutoring prototype.
 
-## Current Progress
+A sentence's predicted JLPT difficulty is not, by itself, a measurement of a learner's proficiency. Learner-level assessment and adaptation require separate design and evaluation.
 
-### 1. OpenJLPT
+## Data Preparation and Publication
 
-OpenJLPT is prepared as the main knowledge source for the RAG system.
+### OpenJLPT-Malay
 
-Processed:
+[OpenJLPT-Malay](https://huggingface.co/datasets/zhardyz/OpenJLPT-Malay) is an AI-assisted Malay localization and RAG preparation of [OpenJLPT](https://github.com/evanclan/OpenJLPT), covering community-estimated JLPT levels N5–N1.
 
-- 7,811 vocabulary records
-- 526 grammar records
-- JLPT levels N5 to N1
-- Vocabulary and grammar schemas standardized
-- Dataset validated
-- No missing critical fields
-- No duplicate IDs
-- Malay localization workflow tested
-- Malaysian Malay localization sample prepared
+| File | Contents | Count |
+| --- | --- | ---: |
+| `vocabulary.ms.json` | Vocabulary master with Malay meanings and example translations | 7,811 records |
+| `grammar.rag.json` | Grammar master with Malay meanings, explanations, formation rules, and examples | 526 records |
+| `vocabulary.rag.jsonl.gz` | Vocabulary and example retrieval chunks, compressed as gzip | 21,529 chunks |
+| `grammar.rag.jsonl` | Grammar and example retrieval chunks | 2,052 chunks |
+| `example_attribution.csv` | Vocabulary-example mappings to upstream Tatoeba sentence links | 13,718 mappings |
 
-Example sentence coverage:
+Example coverage:
 
-- 7,245 / 7,811 vocabulary records
-- 526 / 526 grammar records
+- Vocabulary: 13,718 examples across 7,245 of 7,811 records; 566 records have no examples.
+- Grammar: 1,526 examples across all 526 records.
 
-**Status:** Ready for RAG development.
+Preparation includes schema standardization, Malay localization, targeted grammar corrections, and generation of separate retrieval chunks. Programmatic checks cover required fields, ID uniqueness, meaning alignment, parent links, chunk hashes, and consistency between master records and retrieval chunks.
 
-### 2. WJTSentDiL
+The master JSON files remain the source of truth. RAG chunks are ready for embedding and indexing; they are not embedding vectors or an existing vector database.
 
-WJTSentDiL is prepared for training the Japanese BERT-based JLPT Proficiency Level Estimator.
+**Status:** Published for RAG prototyping. Structural validation does not establish complete linguistic accuracy.
 
-A balanced subset of 100,000 Japanese sentences was prepared:
+### WJTSentDiL Project Subset
 
-| JLPT Level | Sentences |
-|---|---:|
-| N5 | 20,000 |
-| N4 | 20,000 |
-| N3 | 20,000 |
-| N2 | 20,000 |
-| N1 | 20,000 |
+The [published subset](https://huggingface.co/datasets/zhardyz/malay-japanese-adaptive-tutor-wjtsentdil) contains **99,528 Japanese sentences**, retained from an initial class-balanced sample of 100,000 [WJTSentDiL](https://huggingface.co/datasets/bennexx/WJTSentDiL) sentences.
 
-Dataset split:
+Conservative cleanup excluded or quarantined 472 rows. Retained sentences and labels were preserved, and rows stayed in their original splits.
 
-- Training: 80,000
-- Validation: 10,000
-- Testing: 10,000
+| Split | N5 | N4 | N3 | N2 | N1 | Total |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Train | 15,900 | 15,958 | 15,989 | 15,981 | 15,792 | 79,620 |
+| Validation | 1,987 | 1,995 | 1,999 | 2,000 | 1,970 | 9,951 |
+| Test | 1,994 | 1,992 | 2,000 | 1,998 | 1,973 | 9,957 |
+| **Total** | **19,881** | **19,945** | **19,988** | **19,979** | **19,735** | **99,528** |
 
-Validation checks:
+Each CSV contains `sentence` and `level` columns. The classes remain approximately balanced after cleaning; no rebalancing was applied.
 
-- No missing sentences or labels
-- No duplicate sentences
-- No overlap between dataset splits
-- Balanced JLPT classes
-- Valid N1-N5 labels
+Validation covers nonempty values, valid N1–N5 labels, exclusion accounting, preservation of retained text and labels, and duplicate checks within and across splits using exact, NFKC, and punctuation/symbol/whitespace-stripped comparison keys. These checks do not rule out every paraphrase or document-level overlap.
 
-**Status:** Ready for Japanese BERT model development.
+**Label provenance:** The labels were generated by the upstream classifier. They are silver labels, not human-annotated ground truth. Fine-tuning on them is pseudo-label training; performance on the held-out test split measures agreement with those labels.
+
+**Status:** Published for Japanese BERT sentence-difficulty experiments. Independent, reviewed sentence-level evaluation is needed before making stronger claims about JLPT correctness. Grammar-item or vocabulary-item levels should not automatically be treated as difficulty labels for their full example sentences.
+
+## AI Assistance and Review
+
+Most data-preparation work was AI-assisted. Gemini and ChatGPT/Codex supported localization, proposed corrections, scripts, validation, RAG formatting, and documentation. Exact tool/model provenance was not recorded for every entry.
+
+The OpenJLPT-Malay dataset card records sample-based human review and programmatic validation. Neither release is claimed to be fully human-verified. Translation, nuance, reading, sentence-boundary, and inherited label errors may remain.
 
 ## Data Pipeline
 
 ```text
 OpenJLPT
-   ↓
-Preprocessing
-   ↓
-Schema Standardization
-   ↓
-Validation
-   ↓
-Malay Localization
-   ↓
-RAG Knowledge Base
-
+  → Schema standardization and Malay localization
+  → Targeted corrections and structural validation
+  → Vocabulary / grammar masters and retrieval chunks
+  → Published OpenJLPT-Malay release
+  → Embedding and vector indexing [next]
+  → RAG retrieval and Malay explanations [planned]
 
 WJTSentDiL
-   ↓
-Cleaning
-   ↓
-Balanced N1-N5 Sampling
-   ↓
-Train / Validation / Test Split
-   ↓
-Validation
-   ↓
-Japanese BERT JLPT Estimator
+  → Initial balanced 100,000-sentence sample and splits
+  → Conservative exclusions and validation
+  → Published 99,528-sentence subset
+  → Japanese BERT fine-tuning [next]
+  → Independent evaluation [planned]
+  → Integration with learner-response assessment [planned]
 ```
 
-## Project Structure
+## Development Roadmap
 
-```text
-Malay-Japanese_Adaptive_Tutor/
-│
-├── data/
-│   ├── DATA_PREPROCESSING_AND_LOCALIZATION.md
-│   └── processed/
-│       ├── openjlpt/
-│       └── wjtsentdil/
-│
-├── scripts/
-│   ├── process_openjlpt.py
-│   ├── validate_openjlpt.py
-│   ├── create_localization_sample.py
-│   ├── inspect_wjtsentdil.py
-│   ├── prepare_wjtsentdil.py
-│   └── validate_wjtsentdil.py
-│
-└── README.md
-```
+1. Fine-tune and evaluate a Japanese BERT sentence-difficulty classifier using Google Colab as the primary training environment.
+2. Embed and index the OpenJLPT retrieval chunks.
+3. Develop and evaluate the RAG pipeline.
+4. Design learner assessment and adaptive scaffolding using learner responses and performance.
+5. Integrate the tutor and build the user interface.
+6. Add Japanese text, Romaji, and Japanese Text-to-Speech using VOICEVOX.
+7. Evaluate the completed prototype.
 
-## Planned System
+Planned features are development goals, not claims of completed implementation.
 
-The final prototype is planned to include:
+## Sources, Attribution, and Licensing
 
-- LLM-based Japanese tutor
-- Retrieval-Augmented Generation (RAG)
-- JLPT Proficiency Level Estimator
-- Adaptive scaffolding
-- Malay explanations
-- Japanese text and Romaji output
-- Japanese Text-to-Speech using Voicevox
+### OpenJLPT-Malay
 
-## Development Status
+Credit [OpenJLPT contributors and Evan Clan](https://github.com/evanclan/OpenJLPT), together with the upstream sources identified in the release:
 
-**Current Phase: Data Preparation Completed**
+- Electronic Dictionary Research and Development Group (EDRDG) for JMdict.
+- Jonathan Waller for JLPT resources and level assignments.
+- Tatoeba contributors for vocabulary example sentences.
+- OpenJLPT contributors for grammar content and corrections.
 
-Next:
+See the release's [NOTICE.md](https://huggingface.co/datasets/zhardyz/OpenJLPT-Malay/blob/main/NOTICE.md), [upstream notice](https://huggingface.co/datasets/zhardyz/OpenJLPT-Malay/blob/main/UPSTREAM_NOTICE.md), and [example attribution mappings](https://huggingface.co/datasets/zhardyz/OpenJLPT-Malay/blob/main/example_attribution.csv).
 
-1. Develop the Japanese BERT JLPT Proficiency Level Estimator
-2. Prepare the OpenJLPT vector database
-3. Develop the RAG pipeline
-4. Integrate adaptive tutoring logic
-5. Build the user interface
-6. Integrate Voicevox
-7. Evaluate the prototype
+### WJTSentDiL
 
-## Data Sources
+Credit **Enrico Benedetti, Akiko Aizawa, and Florian Boudin**, the [original WJTSentDiL dataset](https://huggingface.co/datasets/bennexx/WJTSentDiL), and their [ACL 2024 paper](https://aclanthology.org/2024.acl-srw.55/). The corpus includes text from Japanese Wikipedia, jpWaC-L, and Tatoeba; their contributors and source-specific terms remain applicable.
 
-- [OpenJLPT](https://github.com/evanclan/OpenJLPT) — vocabulary, grammar, and example sentences
-- [WJTSentDiL](https://huggingface.co/datasets/bennexx/WJTSentDiL) — Japanese sentence difficulty/JLPT level data
+The sampled rows do not preserve original article URLs, source sentence IDs, or contributor names. This attribution gap is documented in the [release notice](https://huggingface.co/datasets/zhardyz/malay-japanese-adaptive-tutor-wjtsentdil/blob/main/NOTICE.md); documentation does not itself recover missing source-level provenance.
 
-## Notes
+### Reuse
 
-Malay localization is currently being developed using English-to-Malay machine translation followed by Malaysian Malay naturalization and review.
+Both dataset releases carry a **CC BY-SA 4.0** designation with applicable upstream rights and attribution conditions preserved. Consult each release's licence and notices before redistribution or adaptation. Dataset licensing does not automatically determine the licence of this repository's software.
 
-The WJTSentDiL labels are retained from the original dataset. The processed subset has been validated for structural consistency, class balance, duplicates, and train/validation/test leakage.
+When reusing the data, credit both the original sources and **Zhardyz** for the derivative preparation, link to the relevant release, and indicate your changes. No endorsement by the original data providers, JLPT organizers, or AI-tool providers is implied.

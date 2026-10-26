@@ -3,7 +3,7 @@ from pathlib import Path
 from collections import Counter
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = BASE_DIR / "data" / "processed" / "openjlpt"
 
 

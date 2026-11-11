@@ -4,7 +4,9 @@ Final Year Project (FYP) for an adaptive Japanese language tutoring system desig
 
 The planned system combines Retrieval-Augmented Generation (RAG), Japanese sentence-difficulty classification, and adaptive teaching strategies to provide explanations in Malay. Learners will be able to use Malay, English, and Japanese.
 
-**Current phase:** Processed datasets published; model training, retrieval, and tutor integration are next. No trained-model results or learning-effectiveness results are claimed yet.
+**Current phase:** Processed datasets published. A command-line grammar RAG prototype is built: the 526 main OpenJLPT-Malay grammar entries are embedded into a local SQLite index and used to generate Malay explanations through a local Ollama model. The web application, tiered scaffolding, and BERT sentence-difficulty classifier are next. No trained-model results or learning-effectiveness results are claimed yet.
+
+To set up and run the prototype, see [docs/RAG_SETUP.md](docs/RAG_SETUP.md).
 
 ## Published Datasets
 
@@ -88,8 +90,10 @@ OpenJLPT
   → Romaji added to example sentences
   → Vocabulary / grammar masters and retrieval chunks
   → Published OpenJLPT-Malay release
-  → Embedding and vector indexing [next]
-  → RAG retrieval and Malay explanations [planned]
+  → Embedding and SQLite vector index (main grammar entries only)
+  → RAG retrieval and Malay explanations (command-line prototype)
+  → Local web tutor with tiered scaffolding [next]
+  → Vocabulary retrieval [planned]
 
 WJTSentDiL
   → Initial balanced 100,000-sentence sample and splits
@@ -103,13 +107,13 @@ WJTSentDiL
 
 ## Development Roadmap
 
-1. Fine-tune and evaluate a Japanese BERT sentence-difficulty classifier using Google Colab as the primary training environment.
-2. Embed and index the OpenJLPT retrieval chunks.
-3. Develop and evaluate the RAG pipeline.
-4. Design learner assessment and adaptive scaffolding using learner responses and performance.
-5. Integrate the tutor and build the user interface.
+1. ~~Embed and index the OpenJLPT grammar retrieval chunks.~~ Done for the 526 main grammar entries; vocabulary is not indexed yet.
+2. ~~Build a command-line RAG prototype.~~ Done; retrieval quality has not been formally evaluated yet.
+3. Wrap the RAG pipeline in a local web application (FastAPI backend, static frontend).
+4. Design adaptive scaffolding (tiered hints before full correction) using learner responses and performance.
+5. Fine-tune and evaluate a Japanese BERT sentence-difficulty classifier using Google Colab as the training environment; run inference locally on CPU.
 6. Add Japanese text, Romaji, and Japanese Text-to-Speech using VOICEVOX.
-7. Evaluate the completed prototype.
+7. Build a lecturer evaluation mode and evaluate the completed prototype.
 
 Planned features are development goals, not claims of completed implementation.
 

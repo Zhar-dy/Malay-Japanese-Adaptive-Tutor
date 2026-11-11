@@ -1,0 +1,7 @@
+# Web app dependencies (Phase 1)
+fastapi==0.162.4
+uvicorn==0.54.0
+pydantic==2.14.3
+
+# Only needed for tests (FastAPI's TestClient uses it)
+httpx==0.28.1

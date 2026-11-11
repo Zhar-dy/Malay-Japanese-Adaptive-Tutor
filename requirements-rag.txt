@@ -7,5 +7,9 @@ Runtime requirements:
 - embeddinggemma:300m
 - qwen3.5:4b
 
+# Downloads the Ollama models this project needs.
+ollama pull embeddinggemma:300m
+ollama pull qwen3.5:4b
+
 Optional test runner (built-in unittest is also supported):
 pytest>=8.0.0

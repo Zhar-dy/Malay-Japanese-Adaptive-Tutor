@@ -34,6 +34,10 @@ Thumbs.db
 *.bin
 *.safetensors
 
+# Web app runtime data and downloaded models
+data/app/
+models/
+
 # Keep summary files
 !data/DATA_PREPROCESSING_AND_LOCALIZATION.md
 !data/processed/Processed Data Summary.txt

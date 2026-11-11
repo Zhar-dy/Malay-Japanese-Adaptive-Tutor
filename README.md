@@ -34,18 +34,19 @@ A sentence's predicted JLPT difficulty is not, by itself, a measurement of a lea
 
 | File | Contents | Count |
 | --- | --- | ---: |
-| `vocabulary.ms.json` | Vocabulary master with Malay meanings and example translations | 7,811 records |
-| `grammar.rag.json` | Grammar master with Malay meanings, explanations, formation rules, and examples | 526 records |
-| `vocabulary.rag.jsonl.gz` | Vocabulary and example retrieval chunks, compressed as gzip | 21,529 chunks |
+| `vocabulary.ms.json` | Vocabulary master with Malay meanings and example translations (examples include romaji) | 7,809 records |
+| `grammar.rag.json` | Grammar master with Malay meanings, explanations, formation rules, and examples (examples include romaji) | 526 records |
+| `vocabulary.rag.jsonl` | Vocabulary and example retrieval chunks | 21,419 chunks |
 | `grammar.rag.jsonl` | Grammar and example retrieval chunks | 2,052 chunks |
-| `example_attribution.csv` | Vocabulary-example mappings to upstream Tatoeba sentence links | 13,718 mappings |
+| `example_attribution.csv` | Vocabulary-example mappings to upstream Tatoeba sentence links | 13,610 mappings |
+| `human_review_sample.csv` | The 150 examples in the human review sample | 150 rows |
 
 Example coverage:
 
-- Vocabulary: 13,718 examples across 7,245 of 7,811 records; 566 records have no examples.
+- Vocabulary: 13,610 examples across 7,206 of 7,809 records; 603 records have no examples.
 - Grammar: 1,526 examples across all 526 records.
 
-Preparation includes schema standardization, Malay localization, targeted grammar corrections, and generation of separate retrieval chunks. Programmatic checks cover required fields, ID uniqueness, meaning alignment, parent links, chunk hashes, and consistency between master records and retrieval chunks.
+Preparation includes schema standardization, Malay localization, targeted grammar corrections, a content-safety cleanup, romaji for every example sentence, and generation of separate retrieval chunks. Romaji is automatically generated and has not been manually checked. Programmatic checks cover required fields, ID uniqueness, meaning alignment, parent links, chunk hashes, and consistency between master records and retrieval chunks.
 
 The master JSON files remain the source of truth. RAG chunks are ready for embedding and indexing; they are not embedding vectors or an existing vector database.
 
@@ -53,16 +54,16 @@ The master JSON files remain the source of truth. RAG chunks are ready for embed
 
 ### WJTSentDiL Project Subset
 
-The [published subset](https://huggingface.co/datasets/zhardyz/malay-japanese-adaptive-tutor-wjtsentdil) contains **99,528 Japanese sentences**, retained from an initial class-balanced sample of 100,000 [WJTSentDiL](https://huggingface.co/datasets/bennexx/WJTSentDiL) sentences.
+The [published subset](https://huggingface.co/datasets/zhardyz/malay-japanese-adaptive-tutor-wjtsentdil) contains **99,381 Japanese sentences**, retained from an initial class-balanced sample of 100,000 [WJTSentDiL](https://huggingface.co/datasets/bennexx/WJTSentDiL) sentences.
 
-Conservative cleanup excluded or quarantined 472 rows. Retained sentences and labels were preserved, and rows stayed in their original splits.
+Conservative cleanup excluded or quarantined 472 rows, and a later content-safety pass removed 147 sentences with sexual or vulgar content. Retained sentences and labels were preserved, and rows stayed in their original splits.
 
 | Split | N5 | N4 | N3 | N2 | N1 | Total |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Train | 15,900 | 15,958 | 15,989 | 15,981 | 15,792 | 79,620 |
-| Validation | 1,987 | 1,995 | 1,999 | 2,000 | 1,970 | 9,951 |
-| Test | 1,994 | 1,992 | 2,000 | 1,998 | 1,973 | 9,957 |
-| **Total** | **19,881** | **19,945** | **19,988** | **19,979** | **19,735** | **99,528** |
+| Train | 15,886 | 15,949 | 15,970 | 15,938 | 15,753 | 79,496 |
+| Validation | 1,984 | 1,995 | 1,999 | 1,998 | 1,964 | 9,940 |
+| Test | 1,993 | 1,991 | 2,000 | 1,997 | 1,964 | 9,945 |
+| **Total** | **19,863** | **19,935** | **19,969** | **19,933** | **19,681** | **99,381** |
 
 Each CSV contains `sentence` and `level` columns. The classes remain approximately balanced after cleaning; no rebalancing was applied.
 
@@ -74,16 +75,17 @@ Validation covers nonempty values, valid N1–N5 labels, exclusion accounting, p
 
 ## AI Assistance and Review
 
-Most data-preparation work was AI-assisted. Gemini and ChatGPT/Codex supported localization, proposed corrections, scripts, validation, RAG formatting, and documentation. Exact tool/model provenance was not recorded for every entry.
+Most data-preparation work was AI-assisted. Gemini, ChatGPT/Codex, and Claude (Anthropic) supported localization, proposed corrections, scripts, validation, RAG formatting, and documentation. Exact tool/model provenance was not recorded for every entry.
 
-The OpenJLPT-Malay dataset card records sample-based human review and programmatic validation. Neither release is claimed to be fully human-verified. Translation, nuance, reading, sentence-boundary, and inherited label errors may remain.
+For OpenJLPT-Malay, 150 randomly sampled example sentences (30 per JLPT level; 24 vocabulary and 6 grammar) were manually reviewed against the Japanese, with only minor issues noted. That is about 1% of the roughly 15,100 examples, so the rest is reviewed by AI and programmatic checks only. The dataset card records this review and the programmatic validation. Neither release is claimed to be fully human-verified. Translation, nuance, reading, sentence-boundary, and inherited label errors may remain.
 
 ## Data Pipeline
 
 ```text
 OpenJLPT
   → Schema standardization and Malay localization
-  → Targeted corrections and structural validation
+  → Targeted corrections, content-safety cleanup, and structural validation
+  → Romaji added to example sentences
   → Vocabulary / grammar masters and retrieval chunks
   → Published OpenJLPT-Malay release
   → Embedding and vector indexing [next]
@@ -92,7 +94,8 @@ OpenJLPT
 WJTSentDiL
   → Initial balanced 100,000-sentence sample and splits
   → Conservative exclusions and validation
-  → Published 99,528-sentence subset
+  → Content-safety cleanup (147 rows removed)
+  → Published 99,381-sentence subset
   → Japanese BERT fine-tuning [next]
   → Independent evaluation [planned]
   → Integration with learner-response assessment [planned]

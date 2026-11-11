@@ -4,6 +4,7 @@ data/raw/
 # Processed datasets
 data/processed/openjlpt/
 data/processed/wjtsentdil/
+data/indexes/grammar.sqlite3
 
 # Python
 __pycache__/
@@ -13,14 +14,19 @@ venv/
 
 # Secrets
 .env
+.env.*
 
 # IDE
 .vscode/
 .idea/
+.ipynb_checkpoints/
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Logs
+*.log
 
 # Model files later
 *.pt
@@ -29,6 +35,5 @@ Thumbs.db
 *.safetensors
 
 # Keep summary files
-!data/processed/wjtsentdil/dataset_summary.txt
 !data/DATA_PREPROCESSING_AND_LOCALIZATION.md
 !data/processed/Processed Data Summary.txt

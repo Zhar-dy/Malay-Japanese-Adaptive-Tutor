@@ -13,18 +13,20 @@ Cleaning performed:
 - Removed sentences shorter than 3 characters
 - Removed sentences longer than 300 characters
 - Required Japanese characters
-- Balanced JLPT classes
+- Balanced JLPT classes (original 100,000 = 20,000 per level)
+- Removed 472 broken fragments and near-duplicates (see audit/excluded_and_quarantined_rows.csv)
+- Removed 147 sentences with sexual or vulgar content (see audit/explicit_content_removed.csv)
 
-Class distribution:
-N5: 20000
-N4: 20000
-N3: 20000
-N2: 20000
-N1: 20000
+Class distribution (all splits combined):
+N5: 19863
+N4: 19935
+N3: 19969
+N2: 19933
+N1: 19681
 
-Total: 100000
+Total: 99381
 
 Dataset Split:
-Training: 80000 records
-Validation: 10000 records
-Testing: 10000 records
+Training: 79496 records
+Validation: 9940 records
+Testing: 9945 records

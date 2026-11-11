@@ -1,14 +1,80 @@
 Processed Data Summary
-OpenJLPT — RAG Knowledge Base
-- 7,811 vocabulary records and 526 grammar records covering JLPT N5–N1.
+Last updated: 2026-11-11
+
+OpenJLPT - RAG Knowledge Base
+Source: OpenJLPT (https://github.com/evanclan/OpenJLPT). Files in openjlpt/.
+
+Vocabulary (vocabulary.ms.json, vocabulary.rag.jsonl)
+- 7,809 vocabulary records covering JLPT N5-N1: N5 674, N4 630, N3 1,659, N2 1,778, N1 3,068.
+- 13,610 example sentences, each with Japanese, romaji, English and Malay. 7,206 records contain examples; 603 are retained without examples.
+- RAG file: 21,419 chunks (7,809 word chunks + 13,610 example chunks). Every chunk has a content hash and all hashes verify.
+- Malay meanings and Malay example sentences were retranslated from the Japanese for all levels (N5/N4 earlier, N3-N1 on 2026-11-11). Previous machine translations were word-for-word and often wrong.
+- English glosses that were plainly wrong for the Japanese word were corrected (55 in N3-N1).
+- Sexual and vulgar content removed: 2 vocabulary records, plus example sentences and glosses at all levels. Examples that did not actually contain the headword were also removed.
+- Translation status: AI-translated and AI-checked (quality_status = ai_reviewed_prototype).
+- Romaji: every word already had romaji; romaji was added to all 13,610 example sentences (field "romaji" in vocabulary.ms.json; "example_romaji" / "examples_romaji" in the chunk metadata of vocabulary.rag.jsonl). Chunk text and content hashes are unchanged.
+- Previous versions and a change report are kept in openjlpt/archive/ (pre-romaji copies: *.before_example_romaji_2026-11-11.*).
+
+Human review (2026-11-11)
+- 150 randomly sampled example sentences (30 per level N5-N1: 24 vocabulary + 6 grammar) were checked by a human against the Japanese.
+- Only minor issues were noted; they were not itemised or corrected. No per-entry verdicts were recorded.
+- All other entries are AI-translated and AI-checked only. Per-record human_verified stays false. quality_status stays ai_reviewed_prototype.
+- Sampled entries are listed in openjlpt/human_review_sample.csv.
+
+Grammar (grammar.rag.json, grammar.rag.jsonl)
+- 526 grammar records: N5 81, N4 98, N3 101, N2 123, N1 123.
+- All 526 records contain examples: 1,526 examples with Malay translations.
+- RAG file: 2,052 chunks (526 grammar + 1,526 example chunks).
+- Malay localization completed and structurally validated.
+- Example furigana fields (furigana, furigana_status, furigana_source) were removed from both grammar files and replaced by romaji (field "romaji" in grammar.rag.json; "example_romaji" in grammar.rag.jsonl chunk metadata). Pre-change copies: openjlpt/archive/grammar.rag.before_romaji_2026-11-11.*
+- Record-level fields (pattern, romaji, reading, provenance, quality) are unchanged.
+- Content scan for sexual and vulgar material: no content needed removal.
+- Translation status: AI-generated (quality_status = ai_reviewed_prototype).
+
+General
 - Schemas standardized, required original fields checked, and no duplicate IDs found.
-- 7,245 vocabulary records contain examples; 566 are retained without examples.
-- All 526 grammar records contain examples.
-- Grammar Malay localization completed and structurally validated: 1,526 translated examples.
-- Vocabulary Malay translations generated; correction and review are still ongoing.
-WJTSentDiL — Japanese BERT Training Data
-- 100,000 Japanese sentences, balanced at 20,000 per JLPT level.
-- Training: 80,000; validation: 10,000; testing: 10,000.
-- No missing sentences or labels, no exact duplicate sentences, and no exact sentence overlaps between splits.
-- Source labels retained; validation checks structural consistency rather than independently verifying JLPT difficulty.
+- Chunk integrity: content_sha256 is the SHA-256 of each chunk's "text"; all 23,471 chunks (21,419 vocabulary + 2,052 grammar) verify, with unique IDs and no orphan parent links.
+
+Romaji generation (for the report)
+- Tools: cutlet (Hepburn romanization) with fugashi + unidic-lite for word segmentation.
+- Grammar examples: word segmentation from the Japanese text; the reading of each kanji word is taken from the prepared furigana, which fixes words with several readings (e.g. birthday = tanjoubi, Sunday = nichiyoubi).
+- Vocabulary examples: generated from the Japanese text only (no furigana available), so a word with several readings can occasionally get the wrong one.
+- Rules: particles written as wa / o / e; long vowels written doubled (ou, uu); proper capitalisation at sentence start; fullwidth punctuation converted to ASCII.
+- Romaji is automatically generated and was NOT manually checked (the 150-sample human review covered the translations, not the romaji). Expect occasional reading or word-spacing errors.
+- Purpose in the system: romaji is shown next to the Japanese text in the app UI and also stored in RAG chunk metadata.
+
+Files prepared for upload (data/hf_upload/)
+- OpenJLPT-Malay -> huggingface.co/datasets/zhardyz/OpenJLPT-Malay (vocabulary + grammar master JSON and RAG JSONL, example_attribution.csv, human_review_sample.csv, README.md, DATA_MANIFEST.json).
+- wjtsentdil -> huggingface.co/datasets/zhardyz/malay-japanese-adaptive-tutor-wjtsentdil (train/validation/test CSV, explicit_content_removed.csv, validation_report.json, README.md, DATA_MANIFEST.json).
+- DATA_MANIFEST.json in each folder lists SHA-256 hashes and sizes of the data files; hashes were refreshed on 2026-11-11 after the romaji update.
+- Data version label: 0.1.0 (draft prototype snapshot).
+
+Licence and attribution
+- OpenJLPT-derived data: CC BY-SA 4.0. Credit OpenJLPT / Evan Clan and the upstream sources (JMdict/EDRDG, Jonathan Waller JLPT lists, Tatoeba). OpenJLPT snapshot version 0.3.0, commit 0d1d3410bec90bd4098a7c72de820543cb4f707c. Changes must be indicated (done in the README).
+- WJTSentDiL-derived data: CC BY-SA 4.0 following the upstream dataset. Credit Benedetti, Aizawa and Boudin (ACL 2024 SRW, "Automatically Suggesting Diverse Example Sentences for L2 Japanese Learners Using Pre-Trained Language Models").
+- AI assistance (Gemini, ChatGPT/Codex, Claude) is disclosed in both READMEs.
+
+Known limitations (for the report)
+- OpenJLPT-Malay: Malay and English text is AI-translated and AI-checked; only 150 of about 15,100 examples (about 1%) were human-checked, with minor issues only. Not a human-verified benchmark.
+- JLPT levels are unofficial community estimates, not official certification labels.
+- Romaji is auto-generated and unchecked (see above).
+- Vocabulary chunk metadata has no licence field (the README declares the licence); grammar chunks do.
+
+WJTSentDiL - Japanese BERT Training Data
+Source: bennexx/WJTSentDiL (subset main_data). Files in wjtsentdil/.
+- Started from 100,000 Japanese sentences balanced at 20,000 per JLPT level.
+- Cleanup 1: 472 broken fragments (unmatched quotes/brackets), near-duplicates and conflicting labels removed (logged in wjtsentdil/audit/).
+- Cleanup 2: 147 sentences with sexual or vulgar content removed (logged in wjtsentdil/audit/explicit_content_removed.csv).
+- Final: 99,381 sentences.
+- Active splits:
+    Training:   79,496  (N1 15,753 / N2 15,938 / N3 15,970 / N4 15,949 / N5 15,886)
+    Validation:  9,940  (N1 1,964 / N2 1,998 / N3 1,999 / N4 1,995 / N5 1,984)
+    Testing:     9,945  (N1 1,964 / N2 1,997 / N3 2,000 / N4 1,991 / N5 1,993)
+- Classes are close to balanced but no longer exactly equal.
+- No missing sentences or labels, no exact or near-duplicate sentences, and no overlap between splits.
+- Earlier versions of the splits are kept in wjtsentdil/archive/ (original 100k, and before the explicit-content cleanup).
+- Labels are the source dataset's classifier-generated (silver) labels. Validation checks structural consistency, not independently verified JLPT difficulty.
+- Format: UTF-8 CSV with two columns (sentence, level). Ordinal mapping if needed: N5=0, N4=1, N3=2, N2=3, N1=4.
+- Split by file: train.csv (fine-tuning), validation.csv (checkpoint selection), test.csv (final evaluation only; keep held out).
+- Test accuracy measures agreement with the silver labels, not verified JLPT correctness.
 - Ready for model development.

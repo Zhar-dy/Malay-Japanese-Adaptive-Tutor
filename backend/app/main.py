@@ -4,7 +4,7 @@ from backend.app.config import load_settings
 
 settings = load_settings()
 
-app = FastAPI(title="Malay-Japanese Adaptive Tutor", description="An adaptive tutor for  learning Malay and Japanese languages.", version="1.0.0")
+app = FastAPI(title="Malay-Japanese Adaptive Tutor")
 
 @app.get("/api/health")
 def health():

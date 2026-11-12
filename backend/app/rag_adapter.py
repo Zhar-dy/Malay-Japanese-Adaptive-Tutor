@@ -8,7 +8,7 @@ if str(RAG_DIR) not in sys.path:
 # These imports only work after the sys.path line above.
 from build_grammar_index import MODEL as EMBEDDING_MODEL
 from search_grammar_index import load_index, embed_question, rank_entries
-from ask_grammar_index import SYSTEM_PROMPT, citation_warning, parse_ollama_tutor_response
+from ask_grammar_tutor import SYSTEM_PROMPT, citation_warnings, parse_ollama_tutor_response
 
 LEVELS = ["N5", "N4", "N3", "N2", "N1"] # Ranked by easiest(N5) to hardest(N1)
 

@@ -1,12 +1,12 @@
 """FastAPI entry point for the Malay-Japanese Adaptive Tutor."""
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 
 from backend.app import rag_adapter
 from backend.app.services import store
 from backend.app.config import load_settings
-from backend.app.routers import rag
+from backend.app.routers import health, rag
 
 settings = load_settings()
 
@@ -34,17 +34,4 @@ app = FastAPI(
     lifespan=lifespan,
 )
 app.include_router(rag.router)
-
-
-@app.get("/api/health")
-def health(request: Request):
-    return {
-        "status": "ok",
-        "llm_model": settings.llm_model,
-        "llm_keep_alive": settings.llm_keep_alive,
-        "index": {
-            "loaded": request.app.state.index_info is not None,
-            "entries": len(request.app.state.entries),
-            "error": request.app.state.index_error,
-        },
-    }
+app.include_router(health.router)

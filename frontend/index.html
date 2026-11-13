@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutor Jepun Adaptif</title>
+  <style>
+    body { font-family: "Segoe UI", "Yu Gothic UI", "Meiryo", "Noto Sans JP", sans-serif;
+           max-width: 760px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
+    textarea { width: 100%; font: inherit; }
+    .row { display: flex; gap: .5rem; align-items: center; margin: .5rem 0; }
+    #answer { white-space: pre-wrap; background: #f6f6f6; padding: 1rem; border-radius: 8px; }
+    .source { border: 1px solid #ddd; border-radius: 8px; padding: .5rem 1rem; margin: .5rem 0; }
+    .source pre { white-space: pre-wrap; font: inherit; font-size: .9em; }
+    .warning { color: #a15c00; }
+    .error { color: #b00020; }
+    small { color: #666; }
+  </style>
+</head>
+<body>
+  <h1>Tutor Jepun Adaptif</h1>
+  <p><small>Tanya tatabahasa · Phase 1 prototype</small></p>
+
+  <textarea id="question" rows="3" maxlength="1000"
+            placeholder="Contoh: Apakah fungsi partikel wa?"></textarea>
+  <div class="row">
+    <label>Tahap
+      <select id="level">
+        <option value="">Semua</option>
+        <option>N5</option><option>N4</option><option>N3</option><option>N2</option><option>N1</option>
+      </select>
+    </label>
+    <button id="ask">Tanya</button>
+    <span id="status"></span>
+  </div>
+
+  <div id="answer" hidden></div>
+  <ul id="warnings"></ul>
+  <div id="sources"></div>
+
+  <p><small>Jawapan dijana oleh AI berdasarkan bahan OpenJLPT. Semak dengan pensyarah anda.</small></p>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    function show(data) {
+      $("answer").textContent = data.answer;
+      $("answer").hidden = false;
+
+      for (const warning of data.warnings) {
+        const li = document.createElement("li");
+        li.className = "warning";
+        li.textContent = warning;
+        $("warnings").append(li);
+      }
+
+      for (const s of data.sources) {
+        const box = document.createElement("details");
+        box.className = "source";
+        const summary = document.createElement("summary");
+        summary.textContent = `[${s.ref}] ${s.pattern ?? s.chunk_id} · ${s.jlpt_level} · skor ${s.score.toFixed(3)}`;
+        const text = document.createElement("pre");
+        text.textContent = s.text;
+        box.append(summary, text);
+        if (s.source_url) {
+          const link = document.createElement("a");
+          link.href = s.source_url;
+          link.textContent = "Sumber asal";
+          link.target = "_blank";
+          link.rel = "noopener";
+          box.append(link);
+        }
+        $("sources").append(box);
+      }
+    }
+
+    async function ask() {
+      const question = $("question").value.trim();
+      $("status").className = "";
+      if (!question) {
+        $("status").textContent = "Tulis soalan dahulu.";
+        return;
+      }
+
+      $("ask").disabled = true;
+      $("answer").hidden = true;
+      $("warnings").replaceChildren();
+      $("sources").replaceChildren();
+      const started = Date.now();
+      const seconds = () => Math.round((Date.now() - started) / 1000);
+      const timer = setInterval(() => {
+        $("status").textContent = `Menjana… ${seconds()} s`;
+      }, 500);
+
+      try {
+        const response = await fetch("/api/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question, level: $("level").value || null }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          const detail = typeof data.detail === "string" ? data.detail : JSON.stringify(data.detail);
+          throw new Error(`${response.status}: ${detail}`);
+        }
+        show(data);
+        $("status").textContent = `Siap dalam ${seconds()} s`;
+      } catch (err) {
+        $("status").className = "error";
+        $("status").textContent = `Ralat ${err.message}`;
+      } finally {
+        clearInterval(timer);
+        $("ask").disabled = false;
+      }
+    }
+
+    $("ask").addEventListener("click", ask);
+    $("question").addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && e.ctrlKey) ask();
+    });
+  </script>
+</body>
+</html>

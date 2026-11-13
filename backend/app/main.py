@@ -2,10 +2,11 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 from backend.app import rag_adapter
 from backend.app.services import store
-from backend.app.config import load_settings
+from backend.app.config import ROOT, load_settings
 from backend.app.routers import health, rag
 
 settings = load_settings()
@@ -35,3 +36,6 @@ app = FastAPI(
 )
 app.include_router(rag.router)
 app.include_router(health.router)
+
+# Serve the web page. Mounted LAST so the /api/... routes are matched first.
+app.mount("/", StaticFiles(directory=ROOT / "frontend", html=True), name="frontend")

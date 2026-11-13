@@ -29,3 +29,22 @@ class SearchResponse(BaseModel):
     embedding_model: str
     hits: list[Hit]
     timing_ms: dict[str, int]
+
+class AskRequest(BaseModel):
+    question: str = Field(min_length=1, max_length=1000)
+    level: Optional[Level] = None
+    level_mode: Literal["exact", "at_or_below"] = "exact"
+    top_k: int = Field(default=3, ge=1, le=3)
+    think: bool = False
+    explain_lang: Literal["ms", "en"] = "ms"
+
+
+class AskResponse(BaseModel):
+    answer: str
+    sources: list[Hit]
+    warnings: list[str]
+    truncated: bool
+    model: str
+    model_digest: Optional[str]
+    timing_ms: dict[str, int]
+    eval_count: Optional[int]

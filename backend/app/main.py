@@ -13,6 +13,7 @@ settings = load_settings()
 @asynccontextmanager
 async def lifespan(app):
     # Runs ONCE when the server starts, before the first request.
+    app.state.settings = settings
     try:
         app.state.index_info, app.state.entries = rag_adapter.load_index(settings.index_path)
         app.state.index_error = None

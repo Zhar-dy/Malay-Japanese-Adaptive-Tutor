@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 
 from backend.app import rag_adapter
+from backend.app.services import store
 from backend.app.config import load_settings
 from backend.app.routers import rag
 
@@ -14,6 +15,7 @@ settings = load_settings()
 async def lifespan(app):
     # Runs ONCE when the server starts, before the first request.
     app.state.settings = settings
+    store.init_db(settings.app_db_path)
     try:
         app.state.index_info, app.state.entries = rag_adapter.load_index(settings.index_path)
         app.state.index_error = None

@@ -33,4 +33,6 @@ def explain(settings, question, sources, think=False, explain_lang="ms"):
     result["warnings"] = rag_adapter.citation_warnings(result["answer"], len(sources))
     if result["truncated"]:
         result["warnings"].append("Generation reached its token limit and may be incomplete.")
+    result["messages"] = messages
+    
     return result

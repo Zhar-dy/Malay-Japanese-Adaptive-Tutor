@@ -48,3 +48,4 @@ class AskResponse(BaseModel):
     model_digest: Optional[str]
     timing_ms: dict[str, int]
     eval_count: Optional[int]
+    item_id: Optional[str] = None

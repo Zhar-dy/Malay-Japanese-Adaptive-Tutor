@@ -7,7 +7,7 @@ from fastapi import APIRouter, HTTPException, Request
 
 from backend.app import rag_adapter
 from backend.app.schemas import AskRequest, AskResponse, SearchRequest, SearchResponse
-from backend.app.services import tutor
+from backend.app.services import store, tutor
 
 router = APIRouter(prefix="/api")
 
@@ -78,6 +78,14 @@ def ask(body: AskRequest, request: Request):
                                think=body.think, explain_lang=body.explain_lang)
 
     timing["generate"] = result["generate_ms"]
+    settings = request.app.state.settings
+    item_id = store.log_ask(
+        settings.app_db_path,
+        question=body.question, level=body.level, explain_lang=body.explain_lang,
+        sources=sources,
+        retrieval={"query": body.question, "level_filter": levels,
+                   "level_mode": body.level_mode, "top_k": body.top_k},
+        result=result, timing=timing)
     return {
         "answer": result["answer"],
         "sources": sources,
@@ -87,4 +95,5 @@ def ask(body: AskRequest, request: Request):
         "model_digest": result["model_digest"],
         "timing_ms": timing,
         "eval_count": result["eval_count"],
+        "item_id": item_id,
     }

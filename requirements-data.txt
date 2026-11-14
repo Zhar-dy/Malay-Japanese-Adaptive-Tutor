@@ -1,0 +1,7 @@
+# Data preparation and validation (scripts/openjlpt, scripts/wjtsentdil)
+pandas==X.Y.Z
+
+# Only for prepare_wjtsentdil.py and inspect_wjtsentdil.py (they download WJTSentDiL).
+# datasets does not install on Python 3.15.1: its dependency pyyaml needs a C++ compiler there.
+# Use Python 3.12/3.13 or Google Colab to run those two scripts.
+# datasets

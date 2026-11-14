@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = BASE_DIR / "data" / "processed" / "openjlpt"
 
 
-with open(DATA_DIR / "vocabulary.json", encoding="utf-8") as f:
+with open(DATA_DIR / "vocabulary.ms.json", encoding="utf-8") as f:
     vocab = json.load(f)
 
 

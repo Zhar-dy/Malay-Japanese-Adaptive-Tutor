@@ -12,8 +12,9 @@ def load_json(filename):
         return json.load(f)
 
 
-vocab = load_json("vocabulary.json")
-grammar = load_json("grammar.json")
+# Check the final files: these are what the RAG chunks were built from.
+vocab = load_json("vocabulary.ms.json")
+grammar = load_json("grammar.rag.json")
 
 
 print("=" * 50)
@@ -117,6 +118,39 @@ print("Missing pattern:", missing_pattern)
 print("Missing English meaning:", missing_grammar_meaning)
 print("Missing formation:", missing_formation)
 print("Missing JLPT level:", missing_grammar_level)
+
+
+# -----------------------
+# 3b. MALAY AND ROMAJI
+# -----------------------
+
+print("\n[5b] MALAY AND ROMAJI")
+
+print(
+    "Vocabulary missing Malay meaning:",
+    sum(1 for item in vocab if not item.get("meaning_ms"))
+)
+
+print(
+    "Grammar missing Malay meaning:",
+    sum(1 for item in grammar if not item.get("meaning_ms"))
+)
+
+all_examples = [
+    example
+    for item in vocab + grammar
+    for example in item.get("examples", [])
+]
+
+print(
+    "Examples missing romaji:",
+    sum(1 for example in all_examples if not example.get("romaji"))
+)
+
+print(
+    "Examples missing Malay:",
+    sum(1 for example in all_examples if not example.get("malay"))
+)
 
 
 # -----------------------

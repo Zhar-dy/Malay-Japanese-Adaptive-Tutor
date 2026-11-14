@@ -10,7 +10,7 @@ import sys
 from urllib import error, request
 
 MODEL = "embeddinggemma:300m"
-BASE_URL = "http://localhost:11434/api/"
+BASE_URL = "http://127.0.0.1:11434/api/"
 
 
 def json_text(value):

@@ -46,7 +46,7 @@ def load_settings(env_file=ROOT / ".env"):
     return Settings(
         index_path=path("INDEX_PATH", "data/indexes/grammar.sqlite3"),
         llm_model=get("LLM_MODEL", "qwen3.5:4b"),
-        llm_base_url=get("LLM_BASE_URL", "http://localhost:11434").rstrip("/"),
+        llm_base_url=get("LLM_BASE_URL", "http://127.0.0.1:11434").rstrip("/"),
         llm_keep_alive=get("LLM_KEEP_ALIVE", "10m"),
         eval_seed=int(get("EVAL_SEED", "259")),
         classifier_dir=path("CLASSIFIER_DIR", "models/jlpt-bert"),

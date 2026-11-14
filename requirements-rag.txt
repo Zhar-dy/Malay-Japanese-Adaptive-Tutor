@@ -1,11 +1,15 @@
-RAG Prototype Dependencies
-The runtime prototype uses the Python 3.10+ standard library (sqlite3, urllib, json, math) and communicates directly with a local Ollama daemon.
+# RAG Prototype Dependencies
+# The runtime prototype uses the Python 3.10+ standard library (sqlite3, urllib, json, math) and communicates directly with a local Ollama daemon.
 
-Runtime requirements:
-- Python >= 3.10
-- Ollama (https://ollama.com)
-- embeddinggemma:300m
-- qwen3.5:4b
+# Runtime requirements:
+# - Python >= 3.10
+# - Ollama (https://ollama.com)
+# - embeddinggemma:300m
+# - qwen3.5:4b
 
-Optional test runner (built-in unittest is also supported):
+# Downloads the Ollama models this project needs.
+# ollama pull embeddinggemma:300m
+# ollama pull qwen3.5:4b
+
+# Optional test runner (built-in unittest is also supported):
 pytest>=8.0.0

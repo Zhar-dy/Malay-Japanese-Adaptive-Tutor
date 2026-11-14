@@ -1,0 +1,41 @@
+"""FastAPI entry point for the Malay-Japanese Adaptive Tutor."""
+from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+
+from backend.app import rag_adapter
+from backend.app.services import store
+from backend.app.config import ROOT, load_settings
+from backend.app.routers import health, rag
+
+settings = load_settings()
+
+
+@asynccontextmanager
+async def lifespan(app):
+    # Runs ONCE when the server starts, before the first request.
+    app.state.settings = settings
+    store.init_db(settings.app_db_path)
+    try:
+        app.state.index_info, app.state.entries = rag_adapter.load_index(settings.index_path)
+        app.state.index_error = None
+    except Exception as exc:
+        # Keep the server running so /api/health can explain what is wrong.
+        app.state.index_info, app.state.entries = None, []
+        app.state.index_error = str(exc)
+    yield
+    # Code after `yield` runs once when the server stops (nothing to clean up yet).
+
+
+app = FastAPI(
+    title="Malay-Japanese Adaptive Tutor",
+    description="Japanese tutor for Malaysian learners using RAG and scaffolding",
+    version="0.1.0",
+    lifespan=lifespan,
+)
+app.include_router(rag.router)
+app.include_router(health.router)
+
+# Serve the web page. Mounted LAST so the /api/... routes are matched first.
+app.mount("/", StaticFiles(directory=ROOT / "frontend", html=True), name="frontend")

@@ -4,9 +4,40 @@ Final Year Project (FYP) for an adaptive Japanese language tutoring system desig
 
 The planned system combines Retrieval-Augmented Generation (RAG), Japanese sentence-difficulty classification, and adaptive teaching strategies to provide explanations in Malay. Learners will be able to use Malay, English, and Japanese.
 
-**Current phase:** Processed datasets published. A command-line grammar RAG prototype is built: the 526 main OpenJLPT-Malay grammar entries are embedded into a local SQLite index and used to generate Malay explanations through a local Ollama model. The web application, tiered scaffolding, and BERT sentence-difficulty classifier are next. No trained-model results or learning-effectiveness results are claimed yet.
+**Current phase:** Processed datasets published. The grammar RAG prototype now runs as a local web app: the 526 main OpenJLPT-Malay grammar entries are embedded into a local SQLite index, and a FastAPI backend retrieves them and generates Malay explanations with source citations through a local Ollama model. Tiered scaffolding, the BERT sentence-difficulty classifier, audio, and the lecturer evaluation mode are next. No trained-model results or learning-effectiveness results are claimed yet.
 
-To set up and run the prototype, see [docs/RAG_SETUP.md](docs/RAG_SETUP.md).
+## What Works Now
+
+| Part | What it does | Where |
+| --- | --- | --- |
+| Grammar index | 526 main grammar entries embedded with `embeddinggemma:300m` (768 dimensions) and stored in one SQLite file | `scripts/rag/build_grammar_index.py` |
+| Command-line tutor | Search the index, or ask a question and get a Malay explanation | `scripts/rag/` |
+| Web API | `POST /api/search` (retrieval only), `POST /api/ask` (retrieval and a Malay answer with `[S1]`-style citations), `GET /api/health` (status of Ollama, the index, and the optional parts) | `backend/app/` |
+| Ask page | One page with a question box that shows the answer and its sources | `frontend/index.html` |
+| Answer log | Every answered question is saved locally with its sources, prompt, model version, and timings | `data/app/tutor.sqlite3` (not in Git) |
+| Tests | 4 RAG tests that use the local index, and 10 API tests that run without Ollama | `tests/` |
+
+Everything runs on the local machine. Retrieval covers grammar only for now; vocabulary is published but not indexed. Answer quality has not been formally evaluated yet.
+
+## Getting Started
+
+1. Build the grammar index and try the command-line scripts: [docs/RAG_SETUP.md](docs/RAG_SETUP.md).
+2. Start the web app: [docs/RUNNING.md](docs/RUNNING.md).
+
+Requirements: Python 3.10+ and [Ollama](https://ollama.com) with the `embeddinggemma:300m` and `qwen3.5:4b` models. The web app's Python packages are listed in `requirements-web.txt`; the command-line scripts use only the standard library. Development so far was done on Windows with a 4 GB GPU, where the generation model runs partly on the CPU.
+
+## Repository Layout
+
+```text
+backend/app/           FastAPI app: settings, API routes, Ollama client, answer log
+frontend/              Static ask page served by the backend
+scripts/rag/           Index builder, search, and command-line tutor (reused by the backend)
+scripts/openjlpt/      OpenJLPT-Malay preparation and validation
+scripts/wjtsentdil/    WJTSentDiL subset preparation and validation
+tests/                 Automated tests
+docs/                  Setup and running guides
+data/                  Dataset notes (processed data, indexes, and logs are not in Git)
+```
 
 ## Published Datasets
 
@@ -81,6 +112,8 @@ Most data-preparation work was AI-assisted. Gemini, ChatGPT/Codex, and Claude (A
 
 For OpenJLPT-Malay, 150 randomly sampled example sentences (30 per JLPT level; 24 vocabulary and 6 grammar) were manually reviewed against the Japanese, with only minor issues noted. That is about 1% of the roughly 15,100 examples, so the rest is reviewed by AI and programmatic checks only. The dataset card records this review and the programmatic validation. Neither release is claimed to be fully human-verified. Translation, nuance, reading, sentence-boundary, and inherited label errors may remain.
 
+The application code (RAG scripts, web backend, and tests) was also written with AI assistance, and each part was run and tested by the author. Exact tool provenance was not recorded for every file.
+
 ## Data Pipeline
 
 ```text
@@ -92,7 +125,8 @@ OpenJLPT
   → Published OpenJLPT-Malay release
   → Embedding and SQLite vector index (main grammar entries only)
   → RAG retrieval and Malay explanations (command-line prototype)
-  → Local web tutor with tiered scaffolding [next]
+  → Local web app: search, ask, and answer logging (bare ask page)
+  → Tiered scaffolding in the web tutor [next]
   → Vocabulary retrieval [planned]
 
 WJTSentDiL
@@ -109,7 +143,7 @@ WJTSentDiL
 
 1. ~~Embed and index the OpenJLPT grammar retrieval chunks.~~ Done for the 526 main grammar entries; vocabulary is not indexed yet.
 2. ~~Build a command-line RAG prototype.~~ Done; retrieval quality has not been formally evaluated yet.
-3. Wrap the RAG pipeline in a local web application (FastAPI backend, static frontend).
+3. ~~Wrap the RAG pipeline in a local web application (FastAPI backend, static frontend).~~ Done as a bare version: search and ask endpoints, one ask page, and answer logging. Answer quality has not been evaluated yet.
 4. Design adaptive scaffolding (tiered hints before full correction) using learner responses and performance.
 5. Fine-tune and evaluate a Japanese BERT sentence-difficulty classifier using Google Colab as the training environment; run inference locally on CPU.
 6. Add Japanese text, Romaji, and Japanese Text-to-Speech using VOICEVOX.

@@ -16,6 +16,8 @@ venv/
 .env
 .env.*
 
+!.env.example
+
 # IDE
 .vscode/
 .idea/
@@ -33,6 +35,10 @@ Thumbs.db
 *.pth
 *.bin
 *.safetensors
+
+# Web app runtime data and downloaded models
+data/app/
+models/
 
 # Keep summary files
 !data/DATA_PREPROCESSING_AND_LOCALIZATION.md

@@ -1,4 +1,4 @@
-"""Saves sessions, items and turns to SQLite (ARCHITECTURE.md 3.8). No personal data."""
+"""Saves sessions, items and turns to SQLite. No personal data."""
 from contextlib import closing
 from datetime import datetime, timezone
 import json

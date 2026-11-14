@@ -1,6 +1,6 @@
 """Small client for Ollama's chat API.
 
-Follows the 4 mandatory rules in ARCHITECTURE.md section 2.1:
+Follows 4 rules for talking to Ollama:
 1. /api/chat only   2. "think" at the top level   3. only sampling values in "options"
 4. every reply goes through parse_ollama_tutor_response() first.
 """

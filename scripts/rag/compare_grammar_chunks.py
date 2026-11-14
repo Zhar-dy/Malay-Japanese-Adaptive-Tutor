@@ -37,7 +37,7 @@ def get_embeddings(question, chunks):
         "truncate": False, "keep_alive": 0,
     }
     req = request.Request(
-        "http://localhost:11434/api/embed",
+        "http://127.0.0.1:11434/api/embed",
         data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
         headers={"Content-Type": "application/json"},
     )

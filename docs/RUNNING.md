@@ -8,6 +8,9 @@ scripts, see [RAG_SETUP.md](RAG_SETUP.md).
 Requirements: Windows 10/11, Python 3.10+, [Ollama](https://ollama.com), and the grammar
 index already built (`data/indexes/grammar.sqlite3`, see RAG_SETUP.md).
 
+Development uses Python 3.15.1. There, `uvicorn[standard]` does not install (its `pyyaml`
+dependency does not build), so plain `uvicorn` is used.
+
 ```powershell
 # Create and activate a virtual environment
 python -m venv .venv
@@ -73,5 +76,5 @@ The API tests fake Ollama and the index, so they need neither:
 | `503 Cannot reach Ollama` | Ollama is not running. Open it and retry |
 | `502 Ollama returned HTTP 500` | Often a request sent while the model was still loading or unloading. Wait a few seconds and retry once |
 | `/api/health` shows `"status": "degraded"` | Read the `ollama` and `index` parts of the response |
-| First answer is slow (30–60 s) | The model is loading into memory. See `LLM_KEEP_ALIVE` |
+| The first answer is slower than the next ones | The model is loading into memory. See `LLM_KEEP_ALIVE` |
 | `ImportError` on start | Check file names and that you started from the project folder |

@@ -13,7 +13,7 @@ from ask_grammar_tutor import SYSTEM_PROMPT, citation_warnings, parse_ollama_tut
 LEVELS = ["N5", "N4", "N3", "N2", "N1"] # Ranked by easiest(N5) to hardest(N1)
 
 def allowed_levels(level, level_mode="exact"):
-    """Return the JLPT levels to search. None mean serch every lvl"""
+    """Return the JLPT levels to search. None means search every level."""
     if level is None:
         return None
     if level_mode == "exact":
@@ -28,9 +28,9 @@ def filter_entries(entries, levels):
     return  [entry for entry in entries if entry["metadata"]["jlpt_level"] in levels]
 
 def format_hit(number, hit):
-        """Turn one hit from rank_entries() into the shape the API sends to the browser."""
-        metadata = hit["metadata"]
-        return {
+    """Turn one hit from rank_entries() into the shape the API sends to the browser."""
+    metadata = hit["metadata"]
+    return {
         "ref": f"S{number}",
         "chunk_id": hit["id"],
         "jlpt_level": metadata["jlpt_level"],

@@ -25,6 +25,7 @@ Everything runs on the local machine. Retrieval covers grammar only for now; voc
 2. Start the web app: [docs/RUNNING.md](docs/RUNNING.md).
 
 Requirements: Python 3.10+ and [Ollama](https://ollama.com) with the `embeddinggemma:300m` and `qwen3.5:4b` models. The web app's Python packages are listed in `requirements-web.txt`; the command-line scripts use only the standard library. Development so far was done on Windows with a 4 GB GPU, where the generation model runs partly on the CPU.
+Development uses Python 3.15.1. There, `uvicorn[standard]` does not install (its `pyyaml` dependency does not build), so plain `uvicorn` is used.
 
 ## Repository Layout
 

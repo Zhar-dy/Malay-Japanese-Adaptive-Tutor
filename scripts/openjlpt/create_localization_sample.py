@@ -22,8 +22,10 @@ def save_json(filename, data):
         )
 
 
-vocab = load_json("vocabulary.json")
-grammar = load_json("grammar.json")
+# One-time step: the sample was taken from the step-1 files (Malay still empty),
+# which now live in archive/.
+vocab = load_json("archive/vocabulary.json")
+grammar = load_json("archive/grammar.json")
 
 
 # -------------------------

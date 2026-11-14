@@ -12,7 +12,10 @@ TARGET_PER_LEVEL = 20000
 LEVELS = ["N5", "N4", "N3", "N2", "N1"]
 SEED = 42
 
-OUTPUT_DIR = "data/processed/wjtsentdil"
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parents[2]
+OUTPUT_DIR = BASE_DIR / "data" / "processed" / "wjtsentdil"
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 

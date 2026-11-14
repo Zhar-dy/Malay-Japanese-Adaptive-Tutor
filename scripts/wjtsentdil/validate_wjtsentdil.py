@@ -1,7 +1,10 @@
 import pandas as pd
 import os
 
-DATA_DIR = "data/processed/wjtsentdil"
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parents[2]
+DATA_DIR = BASE_DIR / "data" / "processed" / "wjtsentdil"
 
 train_path = os.path.join(DATA_DIR, "train.csv")
 validation_path = os.path.join(DATA_DIR, "validation.csv")

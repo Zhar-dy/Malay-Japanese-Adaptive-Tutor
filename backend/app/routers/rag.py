@@ -78,6 +78,9 @@ def ask(body: AskRequest, request: Request):
                                think=body.think, explain_lang=body.explain_lang)
 
     timing["generate"] = result["generate_ms"]
+    timing["llm_load"] = result["ollama_ms"]["load"]
+    timing["llm_prompt_eval"] = result["ollama_ms"]["prompt_eval"]
+    timing["llm_eval"] = result["ollama_ms"]["eval"]
     settings = request.app.state.settings
     item_id = store.log_ask(
         settings.app_db_path,
@@ -95,5 +98,6 @@ def ask(body: AskRequest, request: Request):
         "model_digest": result["model_digest"],
         "timing_ms": timing,
         "eval_count": result["eval_count"],
+        "prompt_eval_count": result["prompt_eval_count"],
         "item_id": item_id,
     }

@@ -46,6 +46,7 @@ class AskResponse(BaseModel):
     truncated: bool
     model: str
     model_digest: Optional[str]
-    timing_ms: dict[str, int]
+    timing_ms: dict[str, Optional[int]]
     eval_count: Optional[int]
+    prompt_eval_count: Optional[int] = None
     item_id: Optional[str] = None

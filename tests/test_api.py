@@ -35,6 +35,13 @@ FAKE_ENTRIES = [
     fake_entry("o", "N5", [0.6, 0.8, 0.0]),
     fake_entry("kara", "N4", [0.0, 0.0, 1.0]),
 ]
+# Ollama reports durations in nanoseconds: 5 ms, 1500 ms, 3000 ms.
+FAKE_TIMINGS = {
+    "prompt_eval_count": 300,
+    "load_duration": 5_000_000,
+    "prompt_eval_duration": 1_500_000_000,
+    "eval_duration": 3_000_000_000,
+}
 
 
 class ApiTest(unittest.TestCase):
@@ -47,6 +54,7 @@ class ApiTest(unittest.TestCase):
 
         # Every request the app sends to Ollama is recorded here instead of being sent.
         self.ollama_calls = []
+        self.chat_timings = dict(FAKE_TIMINGS)  # a test can set {} to fake "no timings"
         patches = [
             mock.patch.object(main, "settings", self.settings),
             mock.patch("backend.app.rag_adapter.load_index", return_value=(FAKE_INFO, FAKE_ENTRIES)),
@@ -75,6 +83,7 @@ class ApiTest(unittest.TestCase):
                 "message": {"role": "assistant", "content": "Partikel wa menandakan topik [S1]."},
                 "done_reason": "stop",
                 "eval_count": 12,
+                **self.chat_timings,
             }
         raise AssertionError(f"Unexpected Ollama endpoint: {endpoint}")
 
@@ -152,6 +161,19 @@ class ApiTest(unittest.TestCase):
     def test_ask_allows_at_most_3_sources(self):
         response = self.client.post("/api/ask", json={"question": "x", "top_k": 4})
         self.assertEqual(response.status_code, 422)
+
+    def test_ask_reports_ollama_timings_in_ms(self):
+        data = self.client.post("/api/ask", json={"question": "Apakah wa?"}).json()
+        self.assertEqual(data["timing_ms"]["llm_load"], 5)
+        self.assertEqual(data["timing_ms"]["llm_prompt_eval"], 1500)
+        self.assertEqual(data["timing_ms"]["llm_eval"], 3000)
+        self.assertEqual(data["prompt_eval_count"], 300)
+
+    def test_ask_works_when_ollama_sends_no_timings(self):
+        self.chat_timings = {}
+        response = self.client.post("/api/ask", json={"question": "Apakah wa?"})
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNone(response.json()["timing_ms"]["llm_load"])
 
 
 if __name__ == "__main__":

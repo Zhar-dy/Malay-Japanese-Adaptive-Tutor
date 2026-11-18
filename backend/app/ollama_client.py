@@ -29,6 +29,9 @@ def model_digest(base_url, model):
             return item.get("digest")
     raise ValueError(f"Model {model} is not installed. Run: ollama pull {model}")
 
+def to_ms(nanoseconds):
+    """Ollama durations are in nanoseconds. Return milliseconds, or None if missing."""
+    return None if nanoseconds is None else round(nanoseconds / 1_000_000)
 
 def chat(base_url, model, messages, keep_alive, think=False, options=None, format_schema=None):
     """Ask the model to reply to `messages`. Returns the parsed reply as a dict."""
@@ -47,4 +50,11 @@ def chat(base_url, model, messages, keep_alive, think=False, options=None, forma
     parsed = rag_adapter.parse_ollama_tutor_response(result)   # rule 4: always first
     parsed["model"] = result.get("model", model)
     parsed["raw_output"] = (result.get("message") or {}).get("content", "")  # kept for logging (Step 5)
+    parsed["prompt_eval_count"] = result.get("prompt_eval_count")  # tokens the model READ
+    parsed["ollama_ms"] = {
+        "load": to_ms(result.get("load_duration")),               # loading the model
+        "prompt_eval": to_ms(result.get("prompt_eval_duration")), # reading the prompt
+        "eval": to_ms(result.get("eval_duration")),               # writing the answer
+    }
+    
     return parsed

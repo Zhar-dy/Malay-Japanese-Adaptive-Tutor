@@ -23,6 +23,9 @@ class RomajiTests(unittest.TestCase):
     def test_empty_text_gives_empty_romaji(self):
         self.assertEqual(to_romaji("   ")["romaji"], "")
 
+    def test_punctuation_is_tidy(self):
+        self.assertEqual(to_romaji("ねこ。")["romaji"].lower(), "neko.")
+
 
 if __name__ == "__main__":
     unittest.main()

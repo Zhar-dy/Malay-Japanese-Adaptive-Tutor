@@ -1,0 +1,21 @@
+[
+  {
+    "id": "word-order",
+    "pattern": "語順（SOV）",
+    "romaji": "gojun",
+    "jlpt_level": "N5",
+    "tags": ["word_order"],
+    "meaning_ms": "susunan kata dalam ayat bahasa Jepun: subjek, objek, kata kerja; kata kerja di hujung ayat",
+    "explanation_ms": "Dalam bahasa Jepun, kata kerja (atau です) diletakkan di hujung ayat. Hanya partikel penamat seperti か boleh hadir selepasnya (contoh: 見ますか). Objek dan keterangan lain seperti tempat dan masa berada sebelum kata kerja, dan biasanya ditandakan oleh partikel seperti を, で, に dan と. Kata masa seperti 毎日 dan 今日 tidak memerlukan partikel, tetapi hari dan waktu tertentu menggunakan に (contoh: 日曜日に). Ini berbeza daripada bahasa Melayu dan Inggeris yang menggunakan susunan subjek, kata kerja, objek.",
+    "formation_ms": "[Subjek/Topik] は + [objek] を + kata kerja",
+    "meaning_en": "Japanese word order: subject, object, verb; the verb comes at the end of the sentence",
+    "formation_en": "[Subject/Topic] は + [object] を + verb",
+    "notes_en": "Japanese puts the verb (or です) at the end of the sentence; only sentence-ending particles such as か can follow it (e.g. 見ますか). Objects and other details such as place and time come before the verb and are usually marked by particles such as を, で, に and と. Time words like 毎日 and 今日 take no particle, but days and clock times take に (e.g. 日曜日に). Malay and English use subject, verb, object order instead.",
+    "examples": [
+      {"ja": "弟は毎日テレビを見ます。", "ms": "Adik lelaki saya menonton televisyen setiap hari.", "en": "My younger brother watches TV every day."},
+      {"ja": "母は台所で料理を作ります。", "ms": "Ibu saya memasak di dapur.", "en": "My mother cooks in the kitchen."},
+      {"ja": "私は日曜日に友達と映画を見ました。", "ms": "Pada hari Ahad, saya menonton wayang bersama kawan.", "en": "I watched a movie with a friend on Sunday."}
+    ],
+    "review_status": "DRAFT"
+  }
+]

@@ -175,6 +175,19 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIsNone(response.json()["timing_ms"]["llm_load"])
 
+    # ---------- /api/eval/cases ----------
+    def test_eval_cases_lists_all_ten(self):
+        response = self.client.get("/api/eval/cases")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 10)
+
+    def test_eval_case_by_id(self):
+        data = self.client.get("/api/eval/cases/case-04").json()
+        self.assertEqual(data["learner_input_ja"], "私は図書館に勉強します。")
+
+    def test_unknown_eval_case_is_404(self):
+        response = self.client.get("/api/eval/cases/case-99")
+        self.assertEqual(response.status_code, 404)
 
 if __name__ == "__main__":
     unittest.main()

@@ -43,7 +43,7 @@ FULL_SCHEMA = {
     "required": HINT_SCHEMA["required"] + ["corrected_ja", "translation_ms"],
 }
 
-# The practice prompt planned in ARCHITECTURE.md section 3.4 (draft).
+# The practice prompt.
 SYSTEM_PROMPT = """Anda tutor bahasa Jepun untuk pelajar Malaysia. Jawab dengan ringkas dalam Bahasa Melayu Malaysia.
 Pelajar sedang cuba menulis satu ayat bahasa Jepun. Anda menerima maksud yang ingin disampaikan,
 cubaan pelajar, bahan rujukan dan tahap bantuan (tier).

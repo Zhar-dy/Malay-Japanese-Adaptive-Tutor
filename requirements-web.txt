@@ -5,3 +5,6 @@ pydantic==2.14.3
 
 # Only needed for tests (FastAPI's TestClient uses it)
 httpx2==2.16.0
+
+# Phase 2: romaji for Japanese text
+pykakasi==2.3.0
